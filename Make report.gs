@@ -90,8 +90,14 @@ function sendReport_(variables) {
     dataTable.addColumn(Charts.ColumnType['NUMBER'], 'Received');
     dataTable.addColumn(Charts.ColumnType['NUMBER'], 'Sent');
 
-    for (var i = 0; i < variables.dayOfEmailsReceived.length; i++) { //create the rows
-      dataTable.addRow([(i + 1).toString(), variables.dayOfEmailsReceived[i], variables.dayOfEmailsSent[i]]);
+    for (var i = 0; i < variables.dayOfEmailsReceived.length; i++) {
+      // create the rows
+      // Sometimes we end up with extra/missing entries in the variables data, which is ... weird
+      // Null coalsecing protect us against this goof
+      dataTable.addRow([(i + 1).toString(),
+                        variables.dayOfEmailsReceived[i] || 0,
+                        variables.dayOfEmailsSent[i] || 0
+                       ]);
     }
     dataTable.build();
     var chartDate = Charts.newAreaChart().setDataTable(dataTable).setDimensions(650, 400).build();
