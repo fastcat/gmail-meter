@@ -93,7 +93,7 @@ function init_(continueMonth, sDate, eDate) {
         };
     }
     else {
-      // Find previous/next month...
+      // Find previous/next month... why does it use the second day of the month?
       //FIXME: this is broken because we never loaded the old variables
       if (continueMonth == true && variables['previous'] != null) {
         variables['previous'] = new Date(variables['previous'].getFullYear(), variables['previous'].getMonth() + 1, 2);
