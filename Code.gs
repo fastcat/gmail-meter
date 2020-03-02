@@ -155,9 +155,8 @@ function fetchEmails_(customReport) {
                 for (var k = 0; k < cc.length; k++) {
                     if (cc[k].match(/</) != null) cc[k] = cc[k].match(/<([^>]*)/)[1];
                 }
-                var reg = new RegExp(from, 'i');
                 // You have sent this msg
-                if ((variables.user + aliases).search(reg) != -1) {
+                if ((variables.user + aliases).toLowerCase().indexOf(from.toLowerCase()) != -1) {
                     if (j == 0) {
                         youStartedTheConversation = true;
                         timeOfFirstMessage = date.getTime();
@@ -228,8 +227,7 @@ function fetchEmails_(customReport) {
                     var aliasesTemp = new Array(variables.user).concat(aliases.split(','));
                     for(var k = 0; k < aliasesTemp.length; k++){
                         if(aliasesTemp[k] != ''){
-                            var reg = new RegExp(aliasesTemp[k], 'i');
-                            if (to.search(reg) != -1) checkSendToYou = true;
+                            if (to.toLowerCase().indexOf(aliasesTemp[k].toLowerCase()) != -1) checkSendToYou = true;
                         }
                     }
                     if(checkSendToYou)variables.sentDirectlyToYou++;
